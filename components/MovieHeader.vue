@@ -1,15 +1,29 @@
+<script lang="ts" setup>
+const colorMode = useColorMode();
+
+const iconTheme = ref("");
+
+onMounted(() => {
+  iconTheme.value =
+    colorMode.value === "dark" ? "lucide:sun-medium" : "lucide:moon";
+});
+
+const toggleIcon = () => {
+  iconTheme.value =
+    iconTheme.value === "lucide:sun-medium"
+      ? "lucide:moon"
+      : "lucide:sun-medium";
+};
+
+const moviesStore = useMoviesStore();
+const { searchMovies } = moviesStore;
+const { searchString } = storeToRefs(moviesStore);
+</script>
 <template>
   <header class="z-20 lg:border-b bg-foreground/5 backdrop-blur-sm">
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="#" class="flex items-center gap-3">
-          <!-- <img
-            src="/icon.png"
-            fit="contain"
-            alt="Company Logo"
-            title="Company Logo"
-            class="h-6 object-contain lg:h-8"
-          /> -->
           <Icon name="lucide:clapperboard" class="h-5 w-5" />
           <span class="font-semibold lg:text-lg">Movie Search</span>
         </NuxtLink>
@@ -70,11 +84,12 @@
       </div>
       <div class="hidden items-center gap-3 lg:flex">
         <div class="px-4">
-          <UiCommand
-            class="max-w-[650px] rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-          >
-            <UiCommandInput placeholder="Search for the movie name..." />
-          </UiCommand>
+          <UiInput
+            v-model="searchString"
+            placeholder="Search for the movie name..."
+            @keyup.enter="searchMovies"
+            @change="searchMovies"
+          />
         </div>
         <UiButton
           @click="
@@ -94,27 +109,10 @@
     </UiContainer>
 
     <div class="lg:hidden">
-      <UiCommand class="max-w-[800px] rounded-none border-none shadow-md">
-        <UiCommandInput placeholder="Search for the movie name..." />
-      </UiCommand>
+      <UiInput
+        class="max-w-[800px] rounded-none border-none"
+        placeholder="Search for the movie name..."
+      />
     </div>
   </header>
 </template>
-
-<script lang="ts" setup>
-const colorMode = useColorMode();
-
-const iconTheme = ref(""); // Initialize with an empty string
-
-onMounted(() => {
-  iconTheme.value =
-    colorMode.value === "dark" ? "lucide:sun-medium" : "lucide:moon";
-});
-
-const toggleIcon = () => {
-  iconTheme.value =
-    iconTheme.value === "lucide:sun-medium"
-      ? "lucide:moon"
-      : "lucide:sun-medium";
-};
-</script>

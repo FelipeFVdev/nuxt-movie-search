@@ -1,12 +1,10 @@
-<script setup lang="ts">
-import type MovieHeader from "~/components/MovieHeader.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
     <MovieHeader />
 
-    <section class="flex h-full w-screen">
+    <section class="flex h-full w-full">
       <slot />
     </section>
   </div>

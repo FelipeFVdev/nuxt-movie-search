@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/fonts",
     "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
   ],
 
   pinia: {
@@ -34,21 +35,31 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    imports: [{
-      from: "tailwind-variants",
-      name: "tv",
-    }, {
-      from: "tailwind-variants",
-      name: "VariantProps",
-      type: true,
-    }, {
-      from: "vue-sonner",
-      name: "toast",
-      as: "useSonner"
-    }],
+    imports: [
+      {
+        from: "tailwind-variants",
+        name: "tv",
+      },
+      {
+        from: "tailwind-variants",
+        name: "VariantProps",
+        type: true,
+      },
+      {
+        from: "vue-sonner",
+        name: "toast",
+        as: "useSonner",
+      },
+    ],
   },
 
   build: {
-    transpile: ["vue-sonner"]
-  }
+    transpile: ["vue-sonner"],
+  },
+
+  runtimeConfig: {
+    public: {
+      apiKey: process.env.API_KEY,
+    },
+  },
 });
