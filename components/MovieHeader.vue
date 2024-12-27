@@ -70,7 +70,9 @@
       </div>
       <div class="hidden items-center gap-3 lg:flex">
         <div class="px-4">
-          <UiCommand class="max-w-[650px] rounded-lg border shadow-md">
+          <UiCommand
+            class="max-w-[650px] rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+          >
             <UiCommandInput placeholder="Search for the movie name..." />
           </UiCommand>
         </div>
@@ -102,9 +104,12 @@
 <script lang="ts" setup>
 const colorMode = useColorMode();
 
-const iconTheme = ref(
-  colorMode.value === "dark" ? "lucide:sun-medium" : "lucide:moon"
-);
+const iconTheme = ref(""); // Initialize with an empty string
+
+onMounted(() => {
+  iconTheme.value =
+    colorMode.value === "dark" ? "lucide:sun-medium" : "lucide:moon";
+});
 
 const toggleIcon = () => {
   iconTheme.value =
