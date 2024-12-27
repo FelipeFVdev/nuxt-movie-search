@@ -1,5 +1,5 @@
 <template>
-  <header class="z-20 border-b bg-foreground/5 backdrop-blur-sm">
+  <header class="z-20 lg:border-b bg-foreground/5 backdrop-blur-sm">
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="#" class="flex items-center gap-3">
@@ -15,11 +15,6 @@
         </NuxtLink>
       </div>
 
-      <div class="flex mx-auto">
-        <UiCommand class="max-w-[650px] rounded-lg border shadow-md">
-          <UiCommandInput placeholder="Search for the movie name..." />
-        </UiCommand>
-      </div>
       <div class="lg:hidden flex items-center gap-2">
         <UiButton
           @click="
@@ -74,6 +69,11 @@
         </UiSheet>
       </div>
       <div class="hidden items-center gap-3 lg:flex">
+        <div class="px-4">
+          <UiCommand class="max-w-[650px] rounded-lg border shadow-md">
+            <UiCommandInput placeholder="Search for the movie name..." />
+          </UiCommand>
+        </div>
         <UiButton
           @click="
             $colorMode.preference =
@@ -90,6 +90,12 @@
         <UiButton to="#" size="sm">Sign up</UiButton>
       </div>
     </UiContainer>
+
+    <div class="lg:hidden">
+      <UiCommand class="max-w-[800px] rounded-none border-none shadow-md">
+        <UiCommandInput placeholder="Search for the movie name..." />
+      </UiCommand>
+    </div>
   </header>
 </template>
 
