@@ -19,15 +19,22 @@ interface Movies {
 
 export const useMoviesStore = defineStore("movies", () => {
   const searchString = ref<string>("");
+  const discoverOrSearch = ref<string>("discover");
+
+  const isLoading = ref<boolean>(false);
   const dataMovie = ref<Results[] | null>(null);
+
   const paginationMovies = ref<Movies | null>(null);
   const page = ref<number>(1);
 
   async function getMovies() {
     const runtimeConfig = useRuntimeConfig();
+    const hasQuery =
+      searchString.value.length > 0 ? `&query=${searchString.value}` : "";
     try {
+      isLoading.value = true;
       const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?page=${page.value}&api_key=${runtimeConfig.public.apiKey}`
+        `https://api.themoviedb.org/3/${discoverOrSearch.value}/movie?page=${page.value}${hasQuery}&api_key=${runtimeConfig.public.apiKey}`
       );
 
       const data: Movies = await response.json();
@@ -46,54 +53,42 @@ export const useMoviesStore = defineStore("movies", () => {
               { locales: "en-US" }
             ).value,
             vote_average: movie.vote_average,
-            poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+            poster_path:
+              movie.poster_path != null
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500",
           };
         });
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 100);
     } catch (error) {
       console.log(error);
       useSonner.error("", { description: "Server Error" });
     }
   }
 
-  async function searchMovies() {
-    const runtimeConfig = useRuntimeConfig();
-    try {
-      // if (!searchString.value) {
-      //   useSonner.warning("", { description: "The search cannot be empty" });
-      // }
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?page=1&query=${searchString.value}&api_key=${runtimeConfig.public.apiKey}`
-      );
+  async function handleSearch() {
+    discoverOrSearch.value = "search";
+    await getMovies();
+  }
 
-      const data = await response.json();
-
-      paginationMovies.value = data;
-      dataMovie.value = data.results.map((movie: any) => {
-        return {
-          ...movie,
-          id: movie.id,
-          title: movie.title,
-          release_date: useDateFormat(
-            new Date(movie.release_date),
-            "MMMM YYYY",
-            { locales: "en-US" }
-          ).value,
-          vote_average: movie.vote_average,
-          poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-        };
-      });
-    } catch (error) {
-      console.log(error);
-      useSonner.error("", { description: "Server Error" });
-    }
+  async function handleHome() {
+    discoverOrSearch.value = "discover";
+    searchString.value = "";
+    await getMovies();
   }
 
   return {
     getMovies,
     dataMovie,
+    isLoading,
     paginationMovies,
-    searchMovies,
-    searchString,
     page,
+    searchString,
+    discoverOrSearch,
+    handleSearch,
+    handleHome,
   };
 });
