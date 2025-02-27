@@ -55,7 +55,7 @@ await getDataMovie(movieId);
         <div>
           <iframe
             ref="el"
-            :src="`https://www.youtube.com/embed/${dataMovieById?.videos?.results[0]?.key}`"
+            :src="dataMovieById?.videos"
             frameborder="0"
             width="100%"
             :height="heightVideo"
