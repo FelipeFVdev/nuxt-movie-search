@@ -8,7 +8,6 @@ interface CastMember {
 const props = defineProps<{
   cast: CastMember[];
 }>();
-console.log(props.cast);
 </script>
 
 <template>
