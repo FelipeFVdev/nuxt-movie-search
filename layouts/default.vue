@@ -1,11 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <main>
     <MovieHeader />
 
-    <section class="flex h-full w-full">
+    <section>
       <slot />
     </section>
-  </div>
+  </main>
 </template>

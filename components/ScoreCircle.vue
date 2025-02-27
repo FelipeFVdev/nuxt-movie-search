@@ -4,7 +4,13 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  class: {
+    type: String,
+    default: "relative top-[-24px] w-12 h-12 ms-3",
+  },
 });
+
+const styles = tv({});
 
 const colorScore = computed(() => {
   if (props.score <= 4) return "text-red-500";
@@ -14,11 +20,11 @@ const colorScore = computed(() => {
 </script>
 
 <template>
-  <div class="relative top-[-24px] w-12 h-12 ms-3">
-    <svg class="w-full h-full rounded-full bg-white" viewBox="0 0 100 100">
+  <div :class="styles({ class: props.class })">
+    <svg class="h-full w-full rounded-full bg-white" viewBox="0 0 100 100">
       <!-- Background circle -->
       <circle
-        class="text-gray-200 stroke-current"
+        class="stroke-current text-gray-200"
         stroke-width="10"
         cx="50"
         cy="50"

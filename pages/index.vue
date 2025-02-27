@@ -1,9 +1,9 @@
 <script lang="ts" setup></script>
 
 <template>
-  <UiContainer>
+  <div>
     <MovieContent />
-  </UiContainer>
+  </div>
 </template>
 
 <style></style>

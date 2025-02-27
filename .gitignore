@@ -4,6 +4,7 @@
 .nuxt
 .nitro
 .cache
+.prettierrc
 dist
 
 # Node dependencies

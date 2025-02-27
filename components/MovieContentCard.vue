@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+const router = useRouter();
 const gridClasses = computed(() => {
   return "hidden lg:grid w-full grid-cols-5 grid-rows-2 gap-4";
 });
 
 const moviesStore = useMoviesStore();
 const { getMovies } = moviesStore;
-const { dataMovie, isLoading } = storeToRefs(moviesStore);
+const { dataMovies, isLoading } = storeToRefs(moviesStore);
 
 onMounted(async () => {
   await getMovies();
@@ -21,8 +22,11 @@ onMounted(async () => {
       </div>
     </template>
     <template v-else>
-      <template v-for="(card, index) in dataMovie" :key="index">
-        <UiCard class="border-none">
+      <template v-for="(card, index) in dataMovies" :key="index">
+        <UiCard
+          class="border-none cursor-pointer"
+          @click="router.push(`/${card.id}`)"
+        >
           <UiCardContent class="p-0">
             <img class="rounded-lg" :src="card.poster_path" :alt="card.title" />
             <ScoreCircle :score="card.vote_average" />
