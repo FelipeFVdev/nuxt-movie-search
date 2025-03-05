@@ -20,7 +20,7 @@ const { handleSearch, handleHome } = moviesStore;
 const { searchString } = storeToRefs(moviesStore);
 </script>
 <template>
-  <header class="z-20 lg:border-b bg-foreground/5 backdrop-blur-sm">
+  <header class="z-20 bg-foreground/5 backdrop-blur-sm lg:border-b">
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="/" class="flex items-center gap-3" @click="handleHome">
@@ -29,7 +29,7 @@ const { searchString } = storeToRefs(moviesStore);
         </NuxtLink>
       </div>
 
-      <div class="lg:hidden flex items-center gap-2">
+      <div class="flex items-center gap-2 lg:hidden">
         <UiButton
           @click="
             $colorMode.preference =
