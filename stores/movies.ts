@@ -79,6 +79,13 @@ export const useMoviesStore = defineStore("movies", () => {
       isLoading.value = true;
       const response = await fetch(
         `https://api.themoviedb.org/3/${discoverOrSearch.value}/movie?page=${page.value}${hasQuery}&api_key=${runtimeConfig.public.apiKey}`,
+        {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${runtimeConfig.public.apiKey}`,
+          },
+        },
       );
 
       const data: Movies = await response.json();
@@ -120,6 +127,11 @@ export const useMoviesStore = defineStore("movies", () => {
       const { data: movie, status } = await useFetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${runtimeConfig.public.apiKey}&append_to_response=videos,credits`,
         {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${runtimeConfig.public.apiKey}`,
+          },
           transform(input: MovieData) {
             return {
               title: input.title,
