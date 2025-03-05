@@ -7,5 +7,7 @@
     <section>
       <slot />
     </section>
+
+    <MovieFooter />
   </main>
 </template>
