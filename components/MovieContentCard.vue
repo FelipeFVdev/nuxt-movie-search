@@ -16,25 +16,29 @@ onMounted(async () => {
   <div :class="gridClasses">
     <template v-if="isLoading">
       <div v-for="index in 10" :key="index">
-        <UiSkeleton class="rounded-lg w-60 h-80 mb-6" />
-        <UiSkeleton class="h-4 w-16 mb-4" />
-        <UiSkeleton class="h-4 w-28 mb-2" />
+        <UiSkeleton class="mb-6 h-80 w-60 rounded-lg" />
+        <UiSkeleton class="mb-4 h-4 w-16" />
+        <UiSkeleton class="mb-2 h-4 w-28" />
       </div>
     </template>
     <template v-else>
       <template v-for="(card, index) in dataMovies" :key="index">
         <UiCard
-          class="border-none cursor-pointer"
+          class="cursor-pointer shadow-lg dark:shadow-secondary/50"
           @click="router.push(`/${card.id}`)"
         >
           <UiCardContent class="p-0">
-            <img class="rounded-lg" :src="card.poster_path" :alt="card.title" />
+            <img
+              class="min-h-[358.19px] rounded-t-lg"
+              :src="card.poster_path"
+              :alt="card.title"
+            />
             <ScoreCircle :score="card.vote_average" />
           </UiCardContent>
-          <UiCardFooter class="relative p-0 top-[-12px]">
+          <UiCardFooter class="relative mt-[-8px] p-4">
             <div>
               <p>{{ card.title }}</p>
-              <p class="mt-2 text-muted-foreground">
+              <p class="text-muted-foreground">
                 {{ card.release_date }}
               </p>
             </div>

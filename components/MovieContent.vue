@@ -5,10 +5,10 @@ const { dataMovies, paginationMovies, page } = storeToRefs(moviesStore);
 </script>
 
 <template>
-  <section class="w-full h-full">
+  <section class="h-full w-full">
     <UiContainer>
-      <header class="mt-14 mb-5">
-        <p class="text-3xl">Feature today</p>
+      <header class="mb-5 mt-14">
+        <p class="text-3xl">Trending Week</p>
       </header>
 
       <article class="flex justify-center">
@@ -19,7 +19,7 @@ const { dataMovies, paginationMovies, page } = storeToRefs(moviesStore);
         </ClientOnly>
       </article>
 
-      <article class="flex items-center justify-center mt-10">
+      <article class="mt-10 flex items-center justify-center">
         <UiPagination
           v-if="dataMovies"
           v-model:page="page"
