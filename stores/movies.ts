@@ -58,7 +58,7 @@ interface MovieData {
 
 export const useMoviesStore = defineStore("movies", () => {
   const searchString = ref<string>("");
-  const discoverOrSearch = ref<string>("discover");
+  const trendingOrSearch = ref<string>("trending/movie/week");
 
   const isLoading = ref<boolean>(false);
   const dataMovies = ref<Results[] | null>(null);
@@ -72,18 +72,19 @@ export const useMoviesStore = defineStore("movies", () => {
   const heightVideo = computed(() => (315 * width.value) / 560);
 
   async function getMovies() {
-    const runtimeConfig = useRuntimeConfig();
+    const config = useRuntimeConfig();
     const hasQuery =
       searchString.value.length > 0 ? `&query=${searchString.value}` : "";
+
     try {
       isLoading.value = true;
       const response = await fetch(
-        `https://api.themoviedb.org/3/${discoverOrSearch.value}/movie?page=${page.value}${hasQuery}&api_key=${runtimeConfig.public.apiKey}`,
+        `https://api.themoviedb.org/3/${trendingOrSearch.value}?page=${page.value}${hasQuery}`,
         {
           method: "GET",
           headers: {
             accept: "application/json",
-            Authorization: `Bearer ${runtimeConfig.public.apiKey}`,
+            Authorization: `Bearer ${config.public.apiKey}`,
           },
         },
       );
@@ -121,16 +122,16 @@ export const useMoviesStore = defineStore("movies", () => {
   }
 
   async function getDataMovie(id: string) {
-    const runtimeConfig = useRuntimeConfig();
+    const config = useRuntimeConfig();
     try {
       isLoading.value = true;
       const { data: movie, status } = await useFetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${runtimeConfig.public.apiKey}&append_to_response=videos,credits`,
+        `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos,credits`,
         {
           method: "GET",
           headers: {
             accept: "application/json",
-            Authorization: `Bearer ${runtimeConfig.public.apiKey}`,
+            Authorization: `Bearer ${config.public.apiKey}`,
           },
           transform(input: MovieData) {
             return {
@@ -182,12 +183,12 @@ export const useMoviesStore = defineStore("movies", () => {
   }
 
   async function handleSearch() {
-    discoverOrSearch.value = "search";
+    trendingOrSearch.value = "search/movie";
     await getMovies();
   }
 
   async function handleHome() {
-    discoverOrSearch.value = "discover";
+    trendingOrSearch.value = "trending/movie/week";
     searchString.value = "";
     await getMovies();
   }
@@ -199,7 +200,7 @@ export const useMoviesStore = defineStore("movies", () => {
     paginationMovies,
     page,
     searchString,
-    discoverOrSearch,
+    trendingOrSearch,
     handleSearch,
     handleHome,
     getDataMovie,
