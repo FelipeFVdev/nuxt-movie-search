@@ -101,7 +101,7 @@ export const useMoviesStore = defineStore("movies", () => {
             title: movie.title,
             release_date: useDateFormat(
               new Date(movie.release_date),
-              "MMMM YYYY",
+              "MMM DD YYYY",
               { locales: "en-US" },
             ).value,
             vote_average: movie.vote_average,
@@ -140,7 +140,7 @@ export const useMoviesStore = defineStore("movies", () => {
               cast: input.credits.cast.filter((_: any, index) => index < 8),
               release_date: useDateFormat(
                 new Date(input.release_date),
-                "MMMM YYYY",
+                "MMM DD YYYY",
                 { locales: "en-US" },
               ).value,
               runtime: `${Math.floor(input.runtime / 60).toString()}h ${input.runtime % 60}min`,
