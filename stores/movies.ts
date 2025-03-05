@@ -176,7 +176,7 @@ export const useMoviesStore = defineStore("movies", () => {
     );
 
     if (movieInfo) {
-      return `http://www.youtube.com/embed/${movieInfo.key}`;
+      return `https://www.youtube.com/embed/${movieInfo.key}`;
     } else {
       return null;
     }
