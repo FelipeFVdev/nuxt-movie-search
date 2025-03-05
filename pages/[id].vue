@@ -52,17 +52,17 @@ await getDataMovie(movieId);
           <span class="text-lg">Cast</span>
           <MovieCast :cast="dataMovieById?.cast ?? []" />
         </div>
-        <div class="aspect-video w-full self-stretch md:min-h-96">
+        <div class="aspect-video h-full w-full self-stretch md:min-h-96">
           <iframe
             ref="el"
             :src="dataMovieById?.videos"
-            frameborder="0"
-            width="100%"
             :height="heightVideo"
             :title="dataMovieById?.title"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-            class="rounded-lg"
+            class="w-full rounded-lg"
           ></iframe>
         </div>
       </article>
