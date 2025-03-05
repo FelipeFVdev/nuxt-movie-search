@@ -52,7 +52,7 @@ await getDataMovie(movieId);
           <span class="text-lg">Cast</span>
           <MovieCast :cast="dataMovieById?.cast ?? []" />
         </div>
-        <div>
+        <div class="aspect-video w-full self-stretch md:min-h-96">
           <iframe
             ref="el"
             :src="dataMovieById?.videos"
@@ -60,7 +60,7 @@ await getDataMovie(movieId);
             width="100%"
             :height="heightVideo"
             :title="dataMovieById?.title"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture, web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
             class="rounded-lg"
           ></iframe>
