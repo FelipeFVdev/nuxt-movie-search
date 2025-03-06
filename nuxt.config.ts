@@ -14,6 +14,12 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
   ],
 
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
+    },
+  },
+
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },
