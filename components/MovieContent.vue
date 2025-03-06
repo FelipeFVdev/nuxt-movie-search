@@ -6,7 +6,7 @@ const { dataMovies, paginationMovies, page } = storeToRefs(moviesStore);
 
 <template>
   <section class="h-full w-full">
-    <UiContainer>
+    <UiContainer class="max-w-screen-2xl">
       <header class="mb-5 mt-14">
         <p class="text-3xl">Trending Week</p>
       </header>
