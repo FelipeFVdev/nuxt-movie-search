@@ -7,7 +7,7 @@ const { searchString } = storeToRefs(moviesStore);
   <div class="flex w-auto items-center px-4">
     <div class="relative flex items-center">
       <div
-        class="flex h-10 items-center rounded-md rounded-r-none border border-r-0 border-foreground/5 bg-secondary"
+        class="flex h-10 items-center rounded-md rounded-r-none border border-r-0 border-foreground/10 bg-secondary"
       >
         <UiDropdownMenu>
           <UiDropdownMenuTrigger asChild class="flex items-center">
@@ -28,7 +28,7 @@ const { searchString } = storeToRefs(moviesStore);
       <UiInput
         v-model="searchString"
         placeholder="Search for a movie..."
-        class="min-w-[500px] rounded-l-none border-l-0 border-foreground/5 bg-secondary outline-none placeholder:text-muted-foreground hover:bg-foreground/5 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
+        class="min-w-[500px] rounded-l-none border-l-0 border-foreground/10 bg-secondary outline-none placeholder:text-muted-foreground hover:bg-foreground/10 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
         @keyup.enter="handleSearch"
         @change="handleSearch"
       />

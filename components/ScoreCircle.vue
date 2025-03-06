@@ -7,7 +7,7 @@ const props = defineProps({
   },
   class: {
     type: String,
-    default: "relative top-[-24px] w-12 h-12 ms-3",
+    default: "relative left-48 top-[-38px] w-12 h-12",
   },
   size: {
     type: Number,
