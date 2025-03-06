@@ -60,7 +60,7 @@ export const useMoviesStore = defineStore("movies", () => {
   const searchString = ref<string>("");
   const trendingOrSearch = ref<string>("trending/movie/week");
 
-  const isLoading = ref<boolean>(false);
+  const isLoading = ref<boolean>(true);
   const dataMovies = ref<Results[] | null>(null);
   const dataMovieById = ref<MovieData | null>(null);
 
@@ -77,7 +77,6 @@ export const useMoviesStore = defineStore("movies", () => {
       searchString.value.length > 0 ? `&query=${searchString.value}` : "";
 
     try {
-      isLoading.value = true;
       const response = await fetch(
         `https://api.themoviedb.org/3/${trendingOrSearch.value}?page=${page.value}${hasQuery}`,
         {
@@ -114,7 +113,7 @@ export const useMoviesStore = defineStore("movies", () => {
 
       setTimeout(() => {
         isLoading.value = false;
-      }, 100);
+      }, 2500);
     } catch (error) {
       console.log(error);
       useSonner.error("", { description: "Server Error" });
@@ -124,7 +123,6 @@ export const useMoviesStore = defineStore("movies", () => {
   async function getDataMovie(id: string) {
     const config = useRuntimeConfig();
     try {
-      isLoading.value = true;
       const { data: movie, status } = await useFetch(
         `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos,credits`,
         {
@@ -163,7 +161,7 @@ export const useMoviesStore = defineStore("movies", () => {
 
       setTimeout(() => {
         isLoading.value = false;
-      }, 100);
+      }, 2500);
     } catch (error) {
       console.log(error);
       useSonner.error("", { description: "Server Error" });

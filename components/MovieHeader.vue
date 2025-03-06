@@ -23,7 +23,9 @@ const { handleHome } = moviesStore;
     <UiContainer
       class="flex h-16 max-w-screen-2xl items-center justify-between gap-4 lg:h-20"
     >
-      <div class="flex items-center justify-between">
+      <div
+        class="flex items-center justify-between transition-transform duration-300 hover:scale-110"
+      >
         <NuxtLink to="/" @click="handleHome">
           <img src="/blue_short.svg" alt="Movie Search" width="160" />
         </NuxtLink>
